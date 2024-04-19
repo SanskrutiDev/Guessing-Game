@@ -1,24 +1,29 @@
-const max = prompt("Enter the max number");
+const max = parseInt(prompt("Enter the max number"));
+document.getElementById("max").textContent = max;
 
-const random = Math.floor(Math.random()*max) +1;
+const random = Math.floor(Math.random() * max) + 1;
 
-let guess = prompt("Guess the Number");
+function checkGuess() {
+    let guess = parseInt(document.getElementById("guessInput").value);
 
-while(true){
-    if(guess == "quit"){
-        console.log("User Quit");
-        break;
+    if (isNaN(guess)) {
+        setMessage("Please enter a valid number!");
+        return;
     }
 
-    if(guess == random ) {
-        console.log("You are right!congrats!,random number was : "+ random);
-        break;
-    }else if (guess < random){
-        guess = prompt("your gues was too small,please try again");
-
-    }else {
-        guess = prompt("your gues was too large,please try again");
+    if (guess == random) {
+        setMessage(`You are right! Congrats! The random number was ${random}.`);
+    } else if (guess < random) {
+        setMessage("Your guess was too small, please try again.");
+    } else {
+        setMessage("Your guess was too large, please try again.");
     }
-    
+}
 
+function quitGame() {
+    setMessage("User Quit");
+}
+
+function setMessage(msg) {
+    document.getElementById("message").textContent = msg;
 }
